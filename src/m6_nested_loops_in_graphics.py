@@ -3,8 +3,8 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Zeyu Liao.
+"""  # done: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -80,9 +80,30 @@ def draw_L(window, circle, r, c):
     and m and n are small, positive integers.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # done: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    a = circle.center.x
+    b = circle.center.y
+    for k in range(r):
+        for j in range(3):
+            shu = rg.Circle(rg.Point(a,b),circle.radius)
+            shu.fill_color = circle.fill_color
+            shu.attach_to(window)
+            a = a + 2 * circle.radius
+        a = circle.center.x
+        b = b + 2 * circle.radius
+    a = circle.center.x
+    b = circle.center.y + 2 * circle.radius * r
+    for k in range(3):
+        for j in range(c + 3):
+            shu = rg.Circle(rg.Point(a,b),circle.radius)
+            shu.fill_color = circle.fill_color
+            shu.attach_to(window)
+            a = a + 2 * circle.radius
+        a = circle.center.x
+        b = b + 2 * circle.radius
+    window.render()
 
 
 def run_test_draw_wall_on_right():
@@ -124,6 +145,27 @@ def draw_wall_on_right(rectangle, n, window):
     # TODO: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    a = rectangle.get_upper_left_corner()
+    aa = a.x
+    ab = a.y
+    b = rectangle.get_lower_right_corner()
+    ba = b.x
+    bb = b.y
+    xx = ba - aa
+    yy = bb - ab
+    for k in range(n):
+        for j in range(k + 1):
+            shu = rg.Rectangle(rg.Point(aa,ab),rg.Point(ba,bb))
+            aa = aa - xx
+            ba = ba - xx
+            shu.attach_to(window)
+        aa = a.x
+        ba = b.x
+        bb = bb + yy
+        ab = ab + yy
+    window.render()
+
+
 
 
 # ----------------------------------------------------------------------
